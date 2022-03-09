@@ -7,11 +7,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import br.com.alura.agenda.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(this, "Alex Felipe", Toast.LENGTH_LONG).show();
+        setContentView(R.layout.activity_main);
     }
 }
+
