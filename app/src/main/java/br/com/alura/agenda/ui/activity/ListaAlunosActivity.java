@@ -5,6 +5,7 @@ import static br.com.alura.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,8 +35,15 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
+
         dao.salva(new Aluno("Alex", "1122223333", "alex@alura.com.br"));
         dao.salva(new Aluno("Fran", "1122223333", "fran@gmail.com.br"));
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("Remover");
     }
 
     private void configuraFabNovoAluno() {
@@ -55,9 +63,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        atualizaAlunos();
+
+    }
+
+    private void atualizaAlunos() {
         adapter.clear();
         adapter.addAll(dao.todos());
-
     }
 
     private void configuraLista() {
@@ -65,15 +77,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
        final List<Aluno> alunos = dao.todos();
        configuraAdapter(listaDeAlunos);
        configuraListenerDeCliquePorItem(listaDeAlunos);
-       listaDeAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-           @Override
-           public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-               Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
-               dao.remove(alunoEscolhido);
-               adapter.remove(alunoEscolhido);
-               return true;
-           }
-       });
+       //configuraListenerDeCliqueLongoPorItem(listaDeAlunos);
+       registerForContextMenu(listaDeAlunos);
+    }
+
+
+    private void remove(Aluno aluno) {
+        dao.remove(aluno);
+        adapter.remove(aluno);
     }
 
     private void configuraListenerDeCliquePorItem(ListView listaDeAlunos) {
