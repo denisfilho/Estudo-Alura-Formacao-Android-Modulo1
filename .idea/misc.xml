@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_formulario_aluno.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/activity_lista_alunos.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/activity_formulario_aluno_menu.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/menu/activity_lista_alunos_menu.xml" value="0.22083333333333333" />
       </map>
     </option>
